@@ -17,6 +17,6 @@ WORKDIR /opt
 # RUN pip install gunicorn
 
 # Set the entrypoint command
-ENTRYPOINT ["gunicorn", "app:app", "--bind", "0.0.0.0:80"]
+ENTRYPOINT ["gunicorn", "app:app", "--bind", "0.0.0.0:8080"]
 
 # ENTRYPOINT ["python", "app.py", "--port", "80"]
