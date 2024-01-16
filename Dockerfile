@@ -9,7 +9,7 @@ ENV FLASK_ENV=production
 
 COPY . /opt/
 
-EXPOSE 80
+EXPOSE 8080
 
 WORKDIR /opt
 
@@ -17,6 +17,6 @@ WORKDIR /opt
 # RUN pip install gunicorn
 
 # Set the entrypoint command
-ENTRYPOINT ["gunicorn", "app:app", "--bind", "0.0.0.0:8080"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8080", "app:app"]
 
 # ENTRYPOINT ["python", "app.py", "--port", "80"]
