@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Upscaler</title>
+</head>
+<body bgcolor="azure">
+    <center>
+    <h1>UPSCALER</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept=".png, .jpg, .jpeg" required>
+        <select name="method">
+            <option value="2xSal Scaling">2xSal Scaling</option>
+            <option value="Lanczos interpolation">Lanczos interpolation</option>
+            <option value="Cubic interpolation">Cubic interpolation</option>
+            <option value="Area interpolation">Area interpolation</option>
+            <option value="FSRCNN">FSRCNN (only jpgs)</option>
+            <option value="ESPCN">ESPCN (only jpgs)</option>
+            <option value="LapSRN">LapSRN (only jpgs)</option>
+        </select>
+        <button type="submit">Upscale Image</button>
+    </form>
+    </center>
+    {% if upscaled_image %}
+        <h2>Upscaled Image</h2>
+        <img src="{{ upscaled_image }}" alt="Upscaled Image">
+    {% endif %}
+</body>
+</html>
