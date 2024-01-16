@@ -13,4 +13,10 @@ EXPOSE 80
 
 WORKDIR /opt
 
-ENTRYPOINT ["python", "app.py", "--port", "80"]
+# Install Gunicorn
+RUN pip install gunicorn
+
+# Set the entrypoint command
+ENTRYPOINT ["gunicorn", "app:app", "--bind", "0.0.0.0:80"]
+
+# ENTRYPOINT ["python", "app.py", "--port", "80"]
