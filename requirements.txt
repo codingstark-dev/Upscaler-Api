@@ -2,5 +2,5 @@ Flask
 Pillow
 opencv-python
 opencv-contrib-python
-numpy
+# numpy
 gunicorn
