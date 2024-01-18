@@ -68,3 +68,20 @@ def SRN(source):
     source = np.array(source)
     result = sr.upsample(source)
     return Image.fromarray(result)
+
+def SRCNN(source):
+    sr = dnn_superres.DnnSuperResImpl_create()
+    path = "srcnn.pb"  # Path to your SRCNN model file
+    sr.readModel(path)
+    sr.setModel("srcnn", 2)  # Set the model type and scale factor
+    source = np.array(source)
+    result = sr.upsample(source)
+    return Image.fromarray(result)
+def EDSR(source):
+    sr = dnn_superres.DnnSuperResImpl_create()
+    path = "EDSR_x4.pb"  # Path to your EDSR model file
+    sr.readModel(path)
+    sr.setModel("edsr", 4)  # Set the model type and scale factor
+    source = np.array(source)
+    result = sr.upsample(source)
+    return Image.fromarray(result)
