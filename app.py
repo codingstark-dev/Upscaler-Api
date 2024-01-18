@@ -18,7 +18,7 @@ class ImageUpscalerApp:
         try:
             source_image = PILImage.open(self.image_path)
             if self.upscaling_method == '2xSal Scaling':
-                upscaled_image = txsal(source_image)
+                upscaled_image = txsal(source_image,)
             elif self.upscaling_method == 'Lanczos interpolation':
                 upscaled_image = lanczos(source_image)
             elif self.upscaling_method == 'Cubic interpolation':
@@ -30,6 +30,10 @@ class ImageUpscalerApp:
             elif self.upscaling_method == 'ESPCN':
                 upscaled_image = ESPCN(source_image)
             elif self.upscaling_method == 'LapSRN':
+                upscaled_image = SRN(source_image)
+            elif self.upscaling_method == 'SRCNN':
+                upscaled_image = SRN(source_image)  
+            elif self.upscaling_method == 'EDSR':
                 upscaled_image = SRN(source_image)
             else:
                 raise ValueError(f"Invalid method '{self.upscaling_method}' selected.")
@@ -55,4 +59,4 @@ def index():
     return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
