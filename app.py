@@ -30,9 +30,9 @@ class ImageUpscalerApp:
             elif self.upscaling_method == 'ESPCN':
                 upscaled_image = ESPCN(source_image)
             elif self.upscaling_method == 'LapSRN':
-                upscaled_image = SRCNN(source_image)
+                upscaled_image = SRN(source_image)
             elif self.upscaling_method == 'SRCNN':
-                upscaled_image = SRN(source_image)  
+                upscaled_image = SRCNN(source_image)  
             elif self.upscaling_method == 'EDSR':
                 upscaled_image = EDSR(source_image)
             elif self.upscaling_method == 'BSRGAN': 
