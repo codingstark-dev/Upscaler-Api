@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, send_file
 from PIL import Image as PILImage
-from upscaler import txsal, lanczos, cubic, area, FSRCNN, ESPCN, SRN
+from upscaler import txsal, lanczos, cubic, area, FSRCNN, ESPCN, SRN, EDSR, SRCNN,BSRGAN
 import io
 
 app = Flask(__name__)
@@ -30,11 +30,13 @@ class ImageUpscalerApp:
             elif self.upscaling_method == 'ESPCN':
                 upscaled_image = ESPCN(source_image)
             elif self.upscaling_method == 'LapSRN':
-                upscaled_image = SRN(source_image)
+                upscaled_image = SRCNN(source_image)
             elif self.upscaling_method == 'SRCNN':
                 upscaled_image = SRN(source_image)  
             elif self.upscaling_method == 'EDSR':
-                upscaled_image = SRN(source_image)
+                upscaled_image = EDSR(source_image)
+            elif self.upscaling_method == 'BSRGAN': 
+                upscaled_image = BSRGAN(source_image)
             else:
                 raise ValueError(f"Invalid method '{self.upscaling_method}' selected.")
             output_buffer = io.BytesIO()

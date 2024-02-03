@@ -2,6 +2,7 @@ from PIL import Image
 import cv2
 import numpy as np
 from cv2 import dnn_superres
+import onnxruntime as ort
 
 def txsal(source):
     width, height = source.size
@@ -85,3 +86,17 @@ def EDSR(source):
     source = np.array(source)
     result = sr.upsample(source)
     return Image.fromarray(result)
+    
+def BSRGAN(source):
+    sess = ort.InferenceSession("003_realSR_BSRGAN_DFO_s64w8_SwinIR-M_x4_GAN.onnx")
+    source = cv2.cvtColor(np.array(source), cv2.COLOR_RGB2BGR)
+    source = source.astype(np.float32) / 255.0
+    source = np.transpose(source, (2, 0, 1))
+    source = np.expand_dims(source, 0)
+    input_name = sess.get_inputs()[0].name
+    output = sess.run(None, {input_name: source})
+    output = output[0]
+    output = np.squeeze(output)
+    output = np.transpose(output, (1, 2, 0))
+    output = (output * 255).clip(0, 255).astype("uint8")
+    return Image.fromarray(cv2.cvtColor(output, cv2.COLOR_BGR2RGB))
